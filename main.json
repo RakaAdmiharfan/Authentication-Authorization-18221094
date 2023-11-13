@@ -1,0 +1,137 @@
+{
+    "requirements": [
+        {
+            "id": 1,
+            "username": "abdul",
+            "metal": "Stainless Steel",
+            "handle": "Plastic",
+            "cutlery_type": "Fork",
+            "quantity": 16,
+            "image_url": "https://cdn.discordapp.com/attachments/1170248640145670164/1170251199279288360/images.png?ex=65585c5c&is=6545e75c&hm=74c0d129252bafd4bbd5a34cf4e422ff59049eb591bd51c4066a7316ea21167f&"
+        },
+        {
+            "id": 2,
+            "username": "faiz",
+            "metal": "Stainless Steel",
+            "handle": "Wood",
+            "cutlery_type": "Spoon",
+            "quantity": 20,
+            "image_url": "https://media.discordapp.net/attachments/1170248640145670164/1170251681586491453/417djo180-L.png?ex=65585ccf&is=6545e7cf&hm=03d35e08dabb4d79194c45b656bf8a144c0708d268128742d0cd95367430339d&=&width=656&height=656"
+        }
+    ],
+    "metals": [
+        {
+            "metal_id": 1,
+            "name": "Silver"
+        },
+        {
+            "metal_id": 2,
+            "name": "Stainless Steel"
+        }
+    ],
+    "handles": [
+        {
+            "handle_id": 1,
+            "name": "Plastic"
+        },
+        {
+            "handle_id": 2,
+            "name": "Wood"
+        }
+    ],
+    "cutlery_types": [
+        {
+            "type_id": 1,
+            "name": "Spoon"
+        },
+        {
+            "type_id": 2,
+            "name": "Fork"
+        },
+        {
+            "type_id": 3,
+            "name": "Knife"
+        }
+    ],
+    "requirement": [
+        {
+            "id": 1,
+            "username": "abdul",
+            "metal": "Stainless Steel",
+            "handle": "Plastic",
+            "cutlery_type": "Knife",
+            "quantity": 16,
+            "image_url": "https://cdn.discordapp.com/attachments/1170248640145670164/1170248899919872070/415IEhFdYtL.png?ex=65585a37&is=6545e537&hm=b8d57c9c5dad0ec72e213b2b9cd6e9bdd9c3eebc82da7607a822831597c53f6b&"
+        },
+        {
+            "id": 2,
+            "username": "faiz",
+            "metal": "Stainless Steel",
+            "handle": "Wood",
+            "cutlery_type": "Spoon",
+            "quantity": 20,
+            "image_url": "https://media.discordapp.net/attachments/1170248640145670164/1170251681586491453/417djo180-L.png?ex=65585ccf&is=6545e7cf&hm=03d35e08dabb4d79194c45b656bf8a144c0708d268128742d0cd95367430339d&=&width=656&height=656"
+        }
+    ],
+    "realEstate": [
+        {
+            "id": 1,
+            "name": "Luxury Apartment",
+            "address": "123 Main St",
+            "location": "Los Angeles",
+            "price": 1000000,
+            "area": 2000,
+            "bedroom": 3,
+            "bathroom": 2,
+            "description": "This luxurious apartment is located in the heart of the city and features stunning views of the skyline.",
+            "image": "https://example.com/luxury-apartment.jpg",
+            "type": "Apartment",
+            "status": "For Sale"
+        },
+        {
+            "id": 5,
+            "name": "Luxury Apartment",
+            "address": "123 Main St",
+            "location": "Los Angeles",
+            "price": 1000000,
+            "area": 2000,
+            "bedroom": 3,
+            "bathroom": 2,
+            "description": "This luxurious apartment is located in the heart of the city and features stunning views of the skyline.",
+            "image": "https://example.com/luxury-apartment.jpg",
+            "type": "Apartment",
+            "status": "For Sale"
+        },
+        {
+            "id": 3,
+            "name": "Luxury Apartment",
+            "address": "123 Main St",
+            "location": "Los Angeles",
+            "price": 1000000,
+            "area": 2000,
+            "bedroom": 3,
+            "bathroom": 2,
+            "description": "This luxurious apartment is located in the heart of the city and features stunning views of the skyline.",
+            "image": "https://example.com/luxury-apartment.jpg",
+            "type": "Apartment",
+            "status": "For Sale"
+        }
+    ],
+    "demographicData": [
+        {
+            "population": 100000222,
+            "populationDensity": 5000,
+            "location": "Los Angeles"
+        },
+        {
+            "population": 100000,
+            "populationDensity": 5000,
+            "location": "Jakarta"
+        },
+        {
+            "population": 50000,
+            "populationDensity": 200,
+            "location": "Medan"
+        }
+    ]
+}

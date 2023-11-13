@@ -1,0 +1,72 @@
+{
+    "realEstate": [
+        {
+            "id": 1,
+            "name": "mamat",
+            "address": "string",
+            "location": "string",
+            "price": 0,
+            "area": 0,
+            "bedroom": 0,
+            "bathroom": 0,
+            "description": "string",
+            "image": "string",
+            "type": "string",
+            "status": "string"
+        },
+        {
+            "id": 2,
+            "name": "string",
+            "address": "string",
+            "location": "string",
+            "price": 0,
+            "area": 0,
+            "bedroom": 0,
+            "bathroom": 0,
+            "description": "string",
+            "image": "string",
+            "type": "string",
+            "status": "string"
+        },
+        {
+            "id": 4,
+            "name": "string",
+            "address": "string",
+            "location": "string",
+            "price": 0,
+            "area": 0,
+            "bedroom": 0,
+            "bathroom": 0,
+            "description": "string",
+            "image": "string",
+            "type": "string",
+            "status": "string"
+        },
+        {
+            "id": 3,
+            "name": "string",
+            "address": "string",
+            "location": "string",
+            "price": 0,
+            "area": 0,
+            "bedroom": 0,
+            "bathroom": 0,
+            "description": "string",
+            "image": "string",
+            "type": "string",
+            "status": "string"
+        }
+    ],
+    "demographicData": [
+        {
+            "population": 100,
+            "populationDensity": 0,
+            "location": "Los Angeles"
+        },
+        {
+            "population": 0,
+            "populationDensity": 0,
+            "location": "Bandung"
+        }
+    ]
+}
