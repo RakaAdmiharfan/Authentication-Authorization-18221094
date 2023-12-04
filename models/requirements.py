@@ -14,8 +14,15 @@ class RealEstate(BaseModel):
     image: str
     type: str
     status: str
+    multiplier: float
 
 class DemographicData(BaseModel):
     population: int
     populationDensity: int
     location: str
+
+class DataListrik(BaseModel):
+    username: str
+    tanggal: str
+    jam: int
+    jumlahListrik: float

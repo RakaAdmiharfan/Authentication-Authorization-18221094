@@ -4,6 +4,7 @@ from passlib.hash import bcrypt
 import jwt
 import json
 from models.users import Token, UserIn, UserJSON
+import httpx
 
 # Load user data from JSON file
 with open("data/users.json", "r") as json_file:
@@ -41,10 +42,34 @@ async def generate_token(form_data: OAuth2PasswordRequestForm = Depends()):
             detail='Invalid username or password'
         )
 
+    friend_service_url = "https://integration-api-amjad.victoriousplant-40d1c733.australiaeast.azurecontainerapps.io/token/self"
+
     token_data = {"sub": user['username'], "id": user['id']}
     token = jwt.encode(token_data, JWT_SECRET)
 
-    return {'access_token': token, 'token_type': 'bearer'}
+    friend_token_data = {
+        "username": form_data.username,
+        "password": form_data.password
+    }
+
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.post(friend_service_url, data=friend_token_data)
+        
+        response.raise_for_status()
+        friend_response_data = response.json()
+        friend_token = friend_response_data.get("access_token")
+        # menambahkan token ke user
+        for user in users_data:
+            if user['username'] == form_data.username :
+                user['token_teman'] = friend_token
+                write_users_to_json()
+
+    except httpx.HTTPError as e:
+        print(response.text)
+        raise HTTPException(status_code=500, detail=f"Failed to generate token in friend's service: {str(e)}")
+        
+    return {'access_token': token, 'token_type': 'bearer', 'username' : form_data.username, 'token_teman': friend_token}
 
 # Dependency to get current user
 async def get_current_user(token: str = Depends(oauth2_scheme)):
@@ -76,10 +101,41 @@ async def register_user(user: UserIn):
     password_hash = bcrypt.hash(user.password)
     
     is_admin = False
-    if user.username == "Pak IGGN" or user.username == "Raka":
+    if user.username == "Pak IGBN" or user.username == "Raka" or user.username == "amjad":
         is_admin = True
         
-    new_user = {"id": user_id, "username": user.username, "password_hash": password_hash, "is_admin": is_admin}
+    new_user = {"id": user_id, "username": user.username, "password_hash": password_hash, "is_admin": is_admin, "token_teman": ""}
     users_data.append(new_user)
     write_users_to_json()
+    return new_user
+
+# Route to register a new user
+@auth_router.post('/register', response_model=UserJSON)
+async def register_user(user: UserIn):
+    user_id = len(users_data) + 1
+    password_hash = bcrypt.hash(user.password)
+    
+    is_admin = False
+    if user.username == "Pak IGBN" or user.username == "Raka" or user.username == "amjad":
+        is_admin = True
+        
+    new_user = {"id": user_id, "username": user.username, "password_hash": password_hash, "is_admin": is_admin, "token_teman": ""}
+    users_data.append(new_user)
+    write_users_to_json()
+
+    friend_service_url = "https://integration-api-amjad.victoriousplant-40d1c733.australiaeast.azurecontainerapps.io/register"
+
+    friend_token_data = {
+        "username": user.username,
+        "password": user.password,
+    }
+
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.post(friend_service_url, json=friend_token_data)
+        
+        response.raise_for_status()
+    except httpx.HTTPError as e:
+        raise HTTPException(status_code=500, detail=f"Failed to generate token in friend's service: {str(e)}")
+    
     return new_user

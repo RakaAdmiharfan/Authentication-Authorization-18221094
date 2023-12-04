@@ -1,9 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List, Optional
 import json
-from models.requirements import RealEstate, DemographicData
+from models.requirements import RealEstate, DemographicData, DataListrik
 from models.users import UserJSON
 from routes.auth import get_current_user
+import httpx
 
 
 # Load data from the JSON file
@@ -16,30 +17,139 @@ realEstate = data.get("realEstate", [])
 
 getter_router = APIRouter(tags=["Getters"])
 admin_router = APIRouter(tags=["Admin"])
+friend_router = APIRouter(tags=["Layanan Gabungan"])
 
+#-----------------------------API Orang-----------------------------------#
+#GET DATA 
+@friend_router.get("/dataListrik-realEstate")
+async def get_dataListrikRealEstate(user: UserJSON = Depends(get_current_user)):
+    try:
+        # Lakukan permintaan HTTP ke API eksternal
+        async with httpx.AsyncClient() as client:
+            response = await client.get("https://integration-api-amjad.victoriousplant-40d1c733.australiaeast.azurecontainerapps.io/umum/data_listrik")
+        
+        # Periksa apakah permintaan berhasil (kode status 200)
+        response.raise_for_status()
+
+        # Ubah respons JSON menjadi bentuk yang sesuai dengan model Anda
+        dataListrik = response.json()
+        
+        # # Tambahkan realEstateID ke setiap data
+        idx = 1
+        for data in dataListrik:
+            data["realEstateID"] = idx
+            idx += 1
+
+        return dataListrik
+
+    except httpx.HTTPError as e:
+        # Tangani kesalahan HTTP jika terjadi
+        raise HTTPException(status_code=e.response.status_code, detail=str(e))
+
+    except Exception as e:
+        # Tangani kesalahan umum jika terjadi
+        raise HTTPException(status_code=500, detail=str(e))
+    
+#POST DATA
+@friend_router.post("/post/dataListrik-realEstate", response_model= DataListrik)
+async def addDataListrikRealEstate(change: DataListrik, user: UserJSON = Depends(get_current_user)):
+
+    try:
+        change_dict = change.dict()
+    except Exception as e:
+        raise HTTPException(status_code=422, detail="Invalid input data")
+
+    # print(user.token_teman)
+    url = "https://integration-api-amjad.victoriousplant-40d1c733.australiaeast.azurecontainerapps.io/administrator/data_listik"
+
+    headers = {
+        "Authorization": f"Bearer {user.token_teman}"
+    }
+
+    try:
+        # Make the PUT request
+        async with httpx.AsyncClient() as client:
+            response = await client.post(url, json=change_dict, headers=headers)
+        
+        # Check if the request was successful (status code 2xx)
+        response.raise_for_status()
+
+        # Parse the JSON response
+        updateDataListrik = response.json()
+        
+        return updateDataListrik
+
+    except httpx.HTTPError as e:
+        # Handle HTTP errors
+        if e.response.status_code == 404:
+            raise HTTPException(status_code=404, detail="API Update Data Listrik not found or error")
+        else:
+            raise HTTPException(status_code=e.response.status_code, detail=str(e))
+
+    except Exception as e:
+        # Handle other errors
+        raise HTTPException(status_code=500, detail=str(e))
+    
+#PUT DATA
+@friend_router.put("/put/dataListrik-realEstate", response_model= DataListrik)
+async def updateDataListrikRealEstate(change: DataListrik, user: UserJSON = Depends(get_current_user)):
+
+    try:
+        change_dict = change.dict()
+    except Exception as e:
+        raise HTTPException(status_code=422, detail="Invalid input data")
+
+    # print(user.token_teman)
+    url = "https://integration-api-amjad.victoriousplant-40d1c733.australiaeast.azurecontainerapps.io/administrator/edit_listrik"
+
+    headers = {
+        "Authorization": f"Bearer {user.token_teman}"
+    }
+
+    try:
+        # Make the PUT request
+        async with httpx.AsyncClient() as client:
+            response = await client.put(url, json=change_dict, headers=headers)
+        
+        # Check if the request was successful (status code 2xx)
+        response.raise_for_status()
+
+        # Parse the JSON response
+        updateDataListrik = response.json()
+        
+        return updateDataListrik
+
+    except httpx.HTTPError as e:
+        # Handle HTTP errors
+        if e.response.status_code == 404:
+            raise HTTPException(status_code=404, detail="API Update Data Listrik not found or error")
+        else:
+            raise HTTPException(status_code=e.response.status_code, detail=str(e))
+
+    except Exception as e:
+        # Handle other errors
+        raise HTTPException(status_code=500, detail=str(e))
 
 #-----------------------------Getters-----------------------------------#
 # GET real estate data
 @getter_router.get("/realEstate", response_model=List[RealEstate])
-async def get_real_estate_data() -> List[RealEstate]:
+async def get_real_estate_data(user: UserJSON = Depends(get_current_user)) -> List[RealEstate]:
     return realEstate
 
 # GET demographic data
 @getter_router.get("/demographic", response_model=List[DemographicData])
-async def get_demographic_data() -> List[DemographicData]:
+async def get_demographic_data(user: UserJSON = Depends(get_current_user)) -> List[DemographicData]:
     return demographicData
 
 # GET Real Estate Data by ID
 @getter_router.get("/realEstate/{id}", response_model=RealEstate)
-async def get_real_estate_data_by_id(id: int) -> RealEstate:
-    # Check if the user is an admin or if the requirement belongs to the authenticated user
+async def get_real_estate_data_by_id(id: int, user: UserJSON = Depends(get_current_user)) -> RealEstate:
     real_estate_data = next((req for req in realEstate if req.get("id") == id), None)
     return RealEstate(**real_estate_data)
 
 # GET Demographic Data by Location
 @getter_router.get("/demographic/{location}", response_model=DemographicData)
-async def get_demographic_data_by_location(location: str) -> DemographicData:
-    # Check if the user is an admin or if the requirement belongs to the authenticated user
+async def get_demographic_data_by_location(location: str, user: UserJSON = Depends(get_current_user)) -> DemographicData:
     demographic_data = next((req for req in demographicData if req.get("location") == location), None)
     return DemographicData(**demographic_data)
 
