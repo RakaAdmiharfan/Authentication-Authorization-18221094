@@ -15,93 +15,23 @@
     },
     {
         "id": 3,
-        "username": "Madun",
-        "password_hash": "$2b$12$L8bCLW.jn9wIGm54sMop8uULpwa.biD6v3C2KHSetaepQOhCZ5ouK",
-        "is_admin": false,
-        "token_teman": ""
+        "username": "tes1",
+        "password_hash": "$2b$12$Q8uitMzcksrNtnWfpCFBDuVRxT5v8IIiz.4KbdP3Tj8NfPyj/BfRy",
+        "is_admin": true,
+        "token_teman": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXMxIiwiaWQiOjEyfQ.lusktSuXLjC1063XZpHXNh41XXyPMyb-3Q4NL4hPMHQ"
     },
     {
         "id": 4,
-        "username": "raka",
-        "password_hash": "$2b$12$6xTaFz/Aug7uGcKM5tdSeuM5o/56XQTEI34ygPpQF2/thYNbIxg4i",
-        "is_admin": false,
-        "token_teman": ""
+        "username": "tes1",
+        "password_hash": "$2b$12$XPyaUgedFpc23YkNZjY3deX9UCaZQCAwDRm0xH0oLgPNbVCl9Mo5a",
+        "is_admin": true,
+        "token_teman": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXMxIiwiaWQiOjEyfQ.lusktSuXLjC1063XZpHXNh41XXyPMyb-3Q4NL4hPMHQ"
     },
     {
         "id": 5,
-        "username": "amjad",
-        "password_hash": "$2b$12$Ow4PVpV3NVK7Oszlh2ANDevG8B/kqnweCcIODbrLglis1rMPGneNe",
-        "is_admin": false,
-        "token_teman": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbWphZCIsImlkIjo0fQ.xVvdsa-ikmn4483eguKzOlM7eqhuj06o4LhXT67Y4ao"
-    },
-    {
-        "id": 6,
-        "username": "amjad",
-        "password_hash": "$2b$12$JL3ZeAhnHBHUWr7KT3QAruiQhacKqjtENm7WHK/jMPmLKpQI4BKHa",
-        "is_admin": false,
-        "token_teman": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbWphZCIsImlkIjo0fQ.xVvdsa-ikmn4483eguKzOlM7eqhuj06o4LhXT67Y4ao"
-    },
-    {
-        "id": 7,
-        "username": "amjad",
-        "password_hash": "$2b$12$cyEdyWw7ZEN3hPAEWqvdb.vvzfvWFdqA7WIMd17HEVeLn.EtEW0rq",
-        "is_admin": false,
-        "token_teman": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbWphZCIsImlkIjo0fQ.xVvdsa-ikmn4483eguKzOlM7eqhuj06o4LhXT67Y4ao"
-    },
-    {
-        "id": 8,
-        "username": "amjad",
-        "password_hash": "$2b$12$4eCpg0E2RqJPhtq0Nm2RLeTgx6fXcH6L86yrdMsWxmfakcPygiqrK",
+        "username": "tes2",
+        "password_hash": "$2b$12$qGLIXwpPJCAl40DmdT9vpe8Ghk5Y7EBPPRv3Uy.gAnxrFwAJ3E5Ru",
         "is_admin": true,
-        "token_teman": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbWphZCIsImlkIjo0fQ.xVvdsa-ikmn4483eguKzOlM7eqhuj06o4LhXT67Y4ao"
-    },
-    {
-        "id": 9,
-        "username": "sul",
-        "password_hash": "$2b$12$Sp1esnST0WD/iuUmiYxGaOG5qB8yCEDawyInAR9hWEYQ77nt.C/f2",
-        "is_admin": false,
-        "token_teman": ""
-    },
-    {
-        "id": 10,
-        "username": "alan",
-        "password_hash": "$2b$12$kFhJe.9IWIwrVsIjRaJYhupE7MT0oMm3qPhiIQ2V1/hGTs3J.ktOa",
-        "is_admin": false,
-        "token_teman": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbGFuIiwiaWQiOjExfQ.J-ydXJuyQGpIvP-oPqGzPzm20QZ8oOEBKp9lgSQ0lsc"
-    },
-    {
-        "id": 11,
-        "username": "tes",
-        "password_hash": "$2b$12$tesR6PLiqtlCFS7nVMUFT.9.muzqQK9mxHUEkfxrvm0tj66/O5LE6",
-        "is_admin": false,
-        "token_teman": ""
-    },
-    {
-        "id": 12,
-        "username": "tes1",
-        "password_hash": "$2b$12$0QX5afT8tGN/HN9ub9rkb.fp4UrszKPlC2E4kFyYcWe.VzcXH3d3G",
-        "is_admin": true,
-        "token_teman": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXMxIiwiaWQiOjE1fQ.3KiOOWETMVnceaFye05mIwNSMuzLw3AvjVlZXdYBnr0"
-    },
-    {
-        "id": 13,
-        "username": "amjad",
-        "password_hash": "$2b$12$PGRjAeb92qpSj04Bc/hheO1PvqRisZtoegi0Ygva2azpBkINBwoL.",
-        "is_admin": true,
-        "token_teman": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbWphZCIsImlkIjo0fQ.xVvdsa-ikmn4483eguKzOlM7eqhuj06o4LhXT67Y4ao"
-    },
-    {
-        "id": 14,
-        "username": "amjad",
-        "password_hash": "$2b$12$2VT6CPB0bVnEQS/rJAtV6uTGou7LABZEUgmetDJjORvCX5l/SbpPq",
-        "is_admin": true,
-        "token_teman": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbWphZCIsImlkIjo0fQ.xVvdsa-ikmn4483eguKzOlM7eqhuj06o4LhXT67Y4ao"
-    },
-    {
-        "id": 15,
-        "username": "amjad",
-        "password_hash": "$2b$12$HaJG32y4m87YRyWULJIwLeeRP2vdlSw/qYPjbf/QPP82SVlU8ViBq",
-        "is_admin": true,
-        "token_teman": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbWphZCIsImlkIjo0fQ.xVvdsa-ikmn4483eguKzOlM7eqhuj06o4LhXT67Y4ao"
+        "token_teman": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXMyIiwiaWQiOjE0fQ.6kwQOyr4hb5EHh5ZFRN1IvXhSIKslruaAiTNiGDSfJk"
     }
 ]
