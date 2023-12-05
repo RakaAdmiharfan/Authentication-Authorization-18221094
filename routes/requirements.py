@@ -163,8 +163,8 @@ async def updateDataListrikRealEstate(change: DataListrik, user: UserJSON = Depe
         raise HTTPException(status_code=500, detail=str(e))
     
 # # DELETE DATA
-# @friend_router.delete("/delete/dataListrik-realEstate/{username}")
-# async def deleteDataListrikRealEstate(username: str, user: UserJSON = Depends(get_current_user)):
+@friend_router.delete("/delete/dataListrik-realEstate/{username}")
+async def deleteDataListrikRealEstate(username: str, user: UserJSON = Depends(get_current_user)):
     try:
         # Get the authentication token from the user
         auth_token = user.token_teman
