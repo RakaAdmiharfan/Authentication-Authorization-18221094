@@ -15,16 +15,20 @@ with open("data/requirement.json", "r") as json_file:
 demographicData = data.get("demographicData", [])
 realEstate = data.get("realEstate", [])
 
-getter_router = APIRouter(tags=["Getters"])
-admin_router = APIRouter(tags=["Admin"])
-friend_router = APIRouter(tags=["Layanan Gabungan"])
+getter_router = APIRouter(tags=["Getters Layanan Lama"])
+admin_router = APIRouter(tags=["CRUD Layanan Lama"])
+friend_router = APIRouter(tags=["Layanan Baru (Utama)"])
+support_router = APIRouter(tags=["Layanan Baru (Tambahan)"])
 
 #-----------------------------API Orang-----------------------------------#
-#GET DATA 
-@friend_router.get("/dataListrik-realEstate")
-async def get_dataListrikRealEstate(user: UserJSON = Depends(get_current_user)):
+#GET Data Listrik - Real Estate
+@friend_router.get("/getListrikRealEstate", response_model=List[dict])
+async def get_listrik_real_estate_data(user: UserJSON = Depends(get_current_user)) -> List[dict]:
     try:
-        # Lakukan permintaan HTTP ke API eksternal
+        # Get real estate data
+        real_estate_data = realEstate
+
+        # Lakukan permintaan HTTP ke API eksternal untuk mendapatkan data listrik
         async with httpx.AsyncClient() as client:
             response = await client.get("https://integration-api-amjad.victoriousplant-40d1c733.australiaeast.azurecontainerapps.io/umum/data_listrik")
         
@@ -32,15 +36,38 @@ async def get_dataListrikRealEstate(user: UserJSON = Depends(get_current_user)):
         response.raise_for_status()
 
         # Ubah respons JSON menjadi bentuk yang sesuai dengan model Anda
-        dataListrik = response.json()
-        
-        # # Tambahkan realEstateID ke setiap data
-        idx = 1
-        for data in dataListrik:
-            data["realEstateID"] = idx
-            idx += 1
+        listrik_data = response.json()
 
-        return dataListrik
+        # Tambahkan realEstateID ke setiap data listrik based on id in realEstateData
+        for idx, data in enumerate(listrik_data):
+            # Check if the index is within the range of realEstateData
+            if idx < len(real_estate_data):
+                # Assign the realEstateID based on the id in realEstateData
+                data["realEstateID"] = real_estate_data[idx].get("id")
+            else:
+                # Handle the case where there are more entries in listrik_data than real_estate_data
+                # You may want to assign a default value or handle this case based on your requirements
+                data["realEstateID"] = None  # Set to a default value or handle as needed
+
+        # Join the real estate data with listrik data based on realEstateID and id
+        joined_data = []
+        for real_estate_entry in real_estate_data:
+            for listrik_entry in listrik_data:
+                if listrik_entry.get("realEstateID") == real_estate_entry.get("id"):
+                    # Combine the entries into a single dictionary with selected fields for listrikData
+                    joined_entry = {
+                        "realEstateID": real_estate_entry["id"],
+                        "realEstateData": real_estate_entry,
+                        "listrikData": {
+                            "name": listrik_entry["username"],
+                            "tanggal": listrik_entry["tanggal"],
+                            "jam": listrik_entry["jam"],
+                            "jumlahListrik": listrik_entry["jumlahListrik"],
+                        }
+                    }
+                    joined_data.append(joined_entry)
+
+        return joined_data
 
     except httpx.HTTPError as e:
         # Tangani kesalahan HTTP jika terjadi
@@ -50,46 +77,51 @@ async def get_dataListrikRealEstate(user: UserJSON = Depends(get_current_user)):
         # Tangani kesalahan umum jika terjadi
         raise HTTPException(status_code=500, detail=str(e))
     
-#POST DATA
-@friend_router.post("/post/dataListrik-realEstate", response_model= DataListrik)
+# POST DATA
+@friend_router.post("/post/dataListrik-realEstate", response_model=DataListrik)
 async def addDataListrikRealEstate(change: DataListrik, user: UserJSON = Depends(get_current_user)):
-
     try:
         change_dict = change.dict()
     except Exception as e:
         raise HTTPException(status_code=422, detail="Invalid input data")
 
-    # print(user.token_teman)
     url = "https://integration-api-amjad.victoriousplant-40d1c733.australiaeast.azurecontainerapps.io/administrator/data_listik"
-
-    headers = {
-        "Authorization": f"Bearer {user.token_teman}"
-    }
+    headers = {"Authorization": f"Bearer {user.token_teman}"}
 
     try:
-        # Make the PUT request
+        # Get Data Real Estate
+        real_estate_data = await get_real_estate_data(user)
+
+        # Get Data Listrik
+        async with httpx.AsyncClient() as client:
+            response = await client.get(
+                "https://integration-api-amjad.victoriousplant-40d1c733.australiaeast.azurecontainerapps.io/umum/data_listrik"
+            )
+
+        response.raise_for_status()
+        listrik_data = response.json()
+
+        # Check if the length of dataListrik is not longer than dataRealEstate
+        if len(listrik_data) >= len(real_estate_data):
+            raise HTTPException(status_code=400, detail="Cannot add more dataListrik entries")
+
+        # Make the post request
         async with httpx.AsyncClient() as client:
             response = await client.post(url, json=change_dict, headers=headers)
-        
-        # Check if the request was successful (status code 2xx)
-        response.raise_for_status()
 
-        # Parse the JSON response
+        response.raise_for_status()
         updateDataListrik = response.json()
-        
+
         return updateDataListrik
 
     except httpx.HTTPError as e:
         # Handle HTTP errors
-        if e.response.status_code == 404:
-            raise HTTPException(status_code=404, detail="API Update Data Listrik not found or error")
-        else:
-            raise HTTPException(status_code=e.response.status_code, detail=str(e))
+        raise HTTPException(status_code=e.response.status_code, detail=str(e))
 
     except Exception as e:
         # Handle other errors
-        raise HTTPException(status_code=500, detail=str(e))
-    
+        raise HTTPException(status_code=500, detail="Cannot add more dataListrik entries")
+
 #PUT DATA
 @friend_router.put("/put/dataListrik-realEstate", response_model= DataListrik)
 async def updateDataListrikRealEstate(change: DataListrik, user: UserJSON = Depends(get_current_user)):
@@ -129,10 +161,44 @@ async def updateDataListrikRealEstate(change: DataListrik, user: UserJSON = Depe
     except Exception as e:
         # Handle other errors
         raise HTTPException(status_code=500, detail=str(e))
+    
+# DELETE DATA
+@friend_router.delete("/delete/dataListrik-realEstate/{username}")
+async def deleteDataListrikRealEstate(username: str, user: UserJSON = Depends(get_current_user)):
+    try:
+        # Get the authentication token from the user
+        auth_token = user.token_teman
+
+        # Make the DELETE request with the proper authorization header
+        async with httpx.AsyncClient() as client:
+            response = await client.delete(
+                f"https://integration-api-amjad.victoriousplant-40d1c733.australiaeast.azurecontainerapps.io/administratordelete_listrik/{username}",
+                headers={"Authorization": f"Bearer {auth_token}"}
+            )
+
+        # Check if the request was successful (status code 2xx)
+        response.raise_for_status()
+
+        # Parse the JSON response
+        deleteDataListrik = response.json()
+
+        return deleteDataListrik
+
+    except httpx.HTTPError as e:
+        # Handle HTTP errors
+        if e.response.status_code == 404:
+            raise HTTPException(status_code=404, detail="User not found")
+        else:
+            raise HTTPException(status_code=e.response.status_code, detail=str(e))
+
+    except Exception as e:
+        # Handle other errors
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 #-----------------------------Getters-----------------------------------#
 # GET real estate data
-@getter_router.get("/realEstate", response_model=List[RealEstate])
+@support_router.get("/realEstate", response_model=List[RealEstate])
 async def get_real_estate_data(user: UserJSON = Depends(get_current_user)) -> List[RealEstate]:
     return realEstate
 
@@ -142,7 +208,7 @@ async def get_demographic_data(user: UserJSON = Depends(get_current_user)) -> Li
     return demographicData
 
 # GET Real Estate Data by ID
-@getter_router.get("/realEstate/{id}", response_model=RealEstate)
+@support_router.get("/realEstate/{id}", response_model=RealEstate)
 async def get_real_estate_data_by_id(id: int, user: UserJSON = Depends(get_current_user)) -> RealEstate:
     real_estate_data = next((req for req in realEstate if req.get("id") == id), None)
     return RealEstate(**real_estate_data)
@@ -155,7 +221,7 @@ async def get_demographic_data_by_location(location: str, user: UserJSON = Depen
 
 #-----------------------------Post-----------------------------------#
 #POST Real Estate Data
-@admin_router.post("/realEstate", response_model=RealEstate)
+@support_router.post("/realEstate", response_model=RealEstate)
 async def addRealEstate(change: RealEstate, user: UserJSON = Depends(get_current_user)):
     # Check if the user is an admin or if the requirement belongs to the authenticated user
     if not user.is_admin:
@@ -232,7 +298,7 @@ async def addDemographic(change: DemographicData, user: UserJSON = Depends(get_c
 
 #-----------------------------Put-----------------------------------#
 # PUT Real Estate Data
-@admin_router.put("/realEstate/{id}", response_model=RealEstate)
+@support_router.put("/realEstate/{id}", response_model=RealEstate)
 async def updateRealEstate(id: int, newData: RealEstate, user: UserJSON = Depends(get_current_user)):
     # Check if the user is an admin or if the requirement belongs to the authenticated user
     if not user.is_admin:
@@ -273,7 +339,7 @@ async def updateDemographic(location: str, newData: DemographicData, user: UserJ
 
 #------------------------------Delete----------------------------------#
 # DELETE Real Estate Data
-@admin_router.delete("/realEstate/{id}")
+@support_router.delete("/realEstate/{id}")
 async def deleteRealEstate(id: int, user: UserJSON = Depends(get_current_user)):
     # Check if the user is an admin or if the requirement belongs to the authenticated user
     if not user.is_admin:

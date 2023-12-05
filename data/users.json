@@ -68,5 +68,40 @@
         "password_hash": "$2b$12$kFhJe.9IWIwrVsIjRaJYhupE7MT0oMm3qPhiIQ2V1/hGTs3J.ktOa",
         "is_admin": false,
         "token_teman": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbGFuIiwiaWQiOjExfQ.J-ydXJuyQGpIvP-oPqGzPzm20QZ8oOEBKp9lgSQ0lsc"
+    },
+    {
+        "id": 11,
+        "username": "tes",
+        "password_hash": "$2b$12$tesR6PLiqtlCFS7nVMUFT.9.muzqQK9mxHUEkfxrvm0tj66/O5LE6",
+        "is_admin": false,
+        "token_teman": ""
+    },
+    {
+        "id": 12,
+        "username": "tes1",
+        "password_hash": "$2b$12$0QX5afT8tGN/HN9ub9rkb.fp4UrszKPlC2E4kFyYcWe.VzcXH3d3G",
+        "is_admin": true,
+        "token_teman": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXMxIiwiaWQiOjE1fQ.3KiOOWETMVnceaFye05mIwNSMuzLw3AvjVlZXdYBnr0"
+    },
+    {
+        "id": 13,
+        "username": "amjad",
+        "password_hash": "$2b$12$PGRjAeb92qpSj04Bc/hheO1PvqRisZtoegi0Ygva2azpBkINBwoL.",
+        "is_admin": true,
+        "token_teman": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbWphZCIsImlkIjo0fQ.xVvdsa-ikmn4483eguKzOlM7eqhuj06o4LhXT67Y4ao"
+    },
+    {
+        "id": 14,
+        "username": "amjad",
+        "password_hash": "$2b$12$2VT6CPB0bVnEQS/rJAtV6uTGou7LABZEUgmetDJjORvCX5l/SbpPq",
+        "is_admin": true,
+        "token_teman": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbWphZCIsImlkIjo0fQ.xVvdsa-ikmn4483eguKzOlM7eqhuj06o4LhXT67Y4ao"
+    },
+    {
+        "id": 15,
+        "username": "amjad",
+        "password_hash": "$2b$12$HaJG32y4m87YRyWULJIwLeeRP2vdlSw/qYPjbf/QPP82SVlU8ViBq",
+        "is_admin": true,
+        "token_teman": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbWphZCIsImlkIjo0fQ.xVvdsa-ikmn4483eguKzOlM7eqhuj06o4LhXT67Y4ao"
     }
 ]
