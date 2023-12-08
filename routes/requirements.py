@@ -59,7 +59,6 @@ async def get_listrik_real_estate_data(user: UserJSON = Depends(get_current_user
                         "realEstateID": real_estate_entry["id"],
                         "realEstateData": real_estate_entry,
                         "listrikData": {
-                            "name": listrik_entry["username"],
                             "tanggal": listrik_entry["tanggal"],
                             "jam": listrik_entry["jam"],
                             "jumlahListrik": listrik_entry["jumlahListrik"],

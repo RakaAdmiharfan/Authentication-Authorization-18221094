@@ -1,91 +1,91 @@
 {
-    "realEstate": [
-        {
-            "id": 1,
-            "name": "Raka",
-            "address": "Jl. Raya Cipadung No. 9, Bandung",
-            "location": "Bandung",
-            "price": 20000,
-            "area": 110,
-            "bedroom": 2,
-            "bathroom": 1,
-            "description": "Dekat dengan sekolah, rumah sakit, dan tempat ibadah",
-            "image": "https://www.rumah.com/properti-dijual/dijual-rumah-murah-di-bandung-berkualitas-terbaik-berlokasi-strategis-berad",
-            "type": "Rumah",
-            "status": "Terjual",
-            "multiplier": 2.0
-        },
-        {
-            "id": 2,
-            "name": "Amjad",
-            "address": "Jl. Raya Cipadung No. 9, Bandung",
-            "location": "Bandung",
-            "price": 60000,
-            "area": 120,
-            "bedroom": 8,
-            "bathroom": 8,
-            "description": "Dekat dengan sekolah, rumah sakit, dan tempat ibadah",
-            "image": "https://www.rumah.com/properti-dijual/dijual-rumah-murah-di-bandung-berkualitas-terbaik-berlokasi-strategis-berad",
-            "type": "Rumah",
-            "status": "Dijual",
-            "multiplier": 4.0
-        },
-        {
-            "id": 3,
-            "name": "Auva",
-            "address": "Jl Tubagus",
-            "location": "Bandung",
-            "price": 80000,
-            "area": 150,
-            "bedroom": 3,
-            "bathroom": 2,
-            "description": "Bersih, nyaman, dan aman",
-            "image": "https://www.rumah.com/properti-dijual/dijual-rumah-murah-di-bandung-berkualitas-terbaik-berlokasi-strategis-berad",
-            "type": "Apartment",
-            "status": "Disewa",
-            "multiplier": 1.5
-        },
-        {
-            "id": 4,
-            "name": "Sultan",
-            "address": "Jl Dago Asri",
-            "location": "Bandung",
-            "price": 100000,
-            "area": 200,
-            "bedroom": 4,
-            "bathroom": 3,
-            "description": "Aman dan Tentram",
-            "image": "https://www.rumah.com/properti-dijual/dijual-rumah-murah-di-bandung-berkualitas-terbaik-berlokasi-strategis-berad",
-            "type": "Rumah",
-            "status": "Dijual",
-            "multiplier": 1.2
-        },
-        {
-            "id": 5,
-            "name": "Sul",
-            "address": "Jl Kayu",
-            "location": "Bandung",
-            "price": 50000,
-            "area": 120,
-            "bedroom": 3,
-            "bathroom": 3,
-            "description": "Memiliki Taman",
-            "image": "URL",
-            "type": "Rumah",
-            "status": "Dijual",
-            "multiplier": 2.2
-        }
-    ],
-    "demographicData": [
-        {
-            "population": 100000,
-            "populationDensity": 250,
-            "location": "Los Angeles"
-        },
-        {
-            "population": 50000,
-            "populationDensity": 1000,
-            "location": "Bandung"
-        }
-    ]
+  "realEstate": [
+    {
+      "id": 1,
+      "name": "user1",
+      "address": "Jl. Raya Cipadung No. 9, Bandung",
+      "location": "Bandung",
+      "price": 20000,
+      "area": 110,
+      "bedroom": 2,
+      "bathroom": 1,
+      "description": "Dekat dengan sekolah, rumah sakit, dan tempat ibadah",
+      "image": "https://www.rumah.com/properti-dijual/dijual-rumah-murah-di-bandung-berkualitas-terbaik-berlokasi-strategis-berad",
+      "type": "Rumah",
+      "status": "Terjual",
+      "multiplier": 2.0
+    },
+    {
+      "id": 2,
+      "name": "user2",
+      "address": "Jl. Raya Cipadung No. 9, Bandung",
+      "location": "Bandung",
+      "price": 60000,
+      "area": 120,
+      "bedroom": 8,
+      "bathroom": 8,
+      "description": "Dekat dengan sekolah, rumah sakit, dan tempat ibadah",
+      "image": "https://www.rumah.com/properti-dijual/dijual-rumah-murah-di-bandung-berkualitas-terbaik-berlokasi-strategis-berad",
+      "type": "Rumah",
+      "status": "Dijual",
+      "multiplier": 4.0
+    },
+    {
+      "id": 3,
+      "name": "user1",
+      "address": "Jl Tubagus",
+      "location": "Bandung",
+      "price": 80000,
+      "area": 150,
+      "bedroom": 3,
+      "bathroom": 2,
+      "description": "Bersih, nyaman, dan aman",
+      "image": "https://www.rumah.com/properti-dijual/dijual-rumah-murah-di-bandung-berkualitas-terbaik-berlokasi-strategis-berad",
+      "type": "Apartment",
+      "status": "Disewa",
+      "multiplier": 1.5
+    },
+    {
+      "id": 4,
+      "name": "user2",
+      "address": "Jl Dago Asri",
+      "location": "Bandung",
+      "price": 100000,
+      "area": 200,
+      "bedroom": 4,
+      "bathroom": 3,
+      "description": "Aman dan Tentram",
+      "image": "https://www.rumah.com/properti-dijual/dijual-rumah-murah-di-bandung-berkualitas-terbaik-berlokasi-strategis-berad",
+      "type": "Rumah",
+      "status": "Dijual",
+      "multiplier": 1.2
+    },
+    {
+      "id": 5,
+      "name": "Sul",
+      "address": "Jl Kayu",
+      "location": "Bandung",
+      "price": 50000,
+      "area": 120,
+      "bedroom": 3,
+      "bathroom": 3,
+      "description": "Memiliki Taman",
+      "image": "URL",
+      "type": "Rumah",
+      "status": "Dijual",
+      "multiplier": 2.2
+    }
+  ],
+  "demographicData": [
+    {
+      "population": 100000,
+      "populationDensity": 250,
+      "location": "Los Angeles"
+    },
+    {
+      "population": 50000,
+      "populationDensity": 1000,
+      "location": "Bandung"
+    }
+  ]
 }
